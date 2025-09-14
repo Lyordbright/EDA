@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U.S. Economic Development Administration - Winning Money Program</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --eda-blue: #0052a5;
+            --eda-red: #bf0d3c;
+            --eda-white: #ffffff;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background-color: var(--eda-blue);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--eda-white) !important;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--eda-white) !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0, 82, 165, 0.8), rgba(0, 82, 165, 0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%230052a5" width="100" height="100"/><path fill="%23bf0d3c" d="M0 0L100 100" stroke-width="0"/></svg>');
+            background-size: cover;
+            color: white;
+            padding: 5rem 0;
+            margin-top: 56px;
+        }
+
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--eda-blue);
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--eda-red);
+        }
+
+        .program-card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, opacity 0.5s ease;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-card .card-header {
+            background-color: var(--eda-blue);
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-eda {
+            background-color: var(--eda-red);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-eda:hover {
+            background-color: #9c0a30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 25px;
+            transition: all 0.5s ease;
+        }
+
+        .contact-icon {
+            font-size: 24px;
+            color: var(--eda-blue);
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-title {
+            color: var(--eda-white);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--eda-white);
+            transform: translateX(5px);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: var(--eda-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--eda-blue);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--dark-gray);
+            transition: all 0.5s ease;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-in-left.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-in-right.appear {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .scale-in.appear {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--eda-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        .counted {
+            animation: countUp 0.5s ease-out;
+        }
+
+        @keyframes countUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            transform: translateY(30px);
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .hero-content.appear {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--eda-red);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            animation:
+                typing 3.5s steps(40, end) forwards,
+                blink-caret 0.75s step-end infinite;
+            width: 100%; /* Changed from 0 to 100% to show full text */
+            max-width: 100%;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+                border-right-color: transparent;
+            }
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: var(--eda-red);
+            }
+        }
+        
+        .benefit-item {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .benefit-item i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: var(--eda-blue);
+            font-size: 1.2rem;
+        }
+        
+        .hero-title {
+            overflow: hidden;
+            border-right: 0.15em solid var(--eda-red);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.05em;
+            animation:
+                typing 3.5s steps(40, end) forwards,
+                blink-caret 0.75s step-end infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top" id="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <div class="logo-container">
+                    <div class="logo-placeholder">EDA</div>
+                    <span>U.S. ECONOMIC DEVELOPMENT ADMINISTRATION</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#programs">Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apply">How to Apply</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <div class="hero-content" id="hero-content">
+                        <h1 class="display-4 fw-bold hero-title">Helping Americans Claim Their Winning Money</h1>
+                        <p class="lead mt-4">EDA leads the federal economic development agenda through grants for
+                            infrastructure, innovation, and winning deliveries.</p>
+                        <a href="#apply" class="btn btn-eda btn-lg mt-3 floating">Apply Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="card program-card scale-in">
+                        <div class="card-header text-center">Program Highlights</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>
+                                    Billions in grants available</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Simple
+                                    application process</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>
+                                    Support for all Americans</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i> Fast
+                                    approval times</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="counter" id="counter-1" data-target="4.2">0</div>
+                    <div class="stat-label">Total Grants Distributed ($B)</div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="counter" id="counter-2" data-target="650">0</div>
+                    <div class="stat-label">Thousands of Americans Helped</div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="counter" id="counter-3" data-target="98">0</div>
+                    <div class="stat-label">Satisfaction Rate (%)</div>
+                </div>
+                <div class="col-md-3 col-6 mb-4">
+                    <div class="counter" id="counter-4" data-target="36">0</div>
+                    <div class="stat-label">Average Processing Time (Hours)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title fade-in">About EDA</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p class="lead fade-in">The U.S. Economic Development Administration's mission is to lead the
+                        federal economic development agenda by promoting innovation and competitiveness, preparing
+                        American regions for growth and success in the worldwide economy.</p>
+                    <p class="fade-in">EDA makes investments in economically distressed communities in order to create
+                        jobs for U.S. workers, promote American innovation, and accelerate long-term sustainable
+                        economic growth.</p>
+                    <p class="fade-in">Through the Winning Money Program, we provide direct financial assistance to
+                        qualified Americans who have earned rewards through various federal initiatives.</p>
+                    
+                    <div class="mt-4">
+                        <h4 class="mb-3">Key Benefits</h4>
+                        <div class="benefit-item fade-in">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <h5>Financial Support</h5>
+                            <p>Direct financial assistance to help Americans claim their winnings</p>
+                        </div>
+                        <div class="benefit-item fade-in">
+                            <i class="fas fa-clock"></i>
+                            <h5>Quick Processing</h5>
+                            <p>Fast approval and disbursement of funds to qualified applicants</p>
+                        </div>
+                        <div class="benefit-item fade-in">
+                            <i class="fas fa-headset"></i>
+                            <h5>Dedicated Support</h5>
+                            <p>Professional assistance throughout the application process</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card program-card scale-in">
+                        <div class="card-header text-center">Our Mission</div>
+                        <div class="card-body">
+                            <p class="fade-in"><strong>Vision:</strong> To be the premier resource for economic
+                                development in the United States.</p>
+                            <p class="fade-in"><strong>Mission:</strong> To lead the federal economic development agenda
+                                by promoting innovation and competitiveness.</p>
+                            <p class="fade-in"><strong>Values:</strong> Integrity, Excellence, Accountability,
+                                Innovation, Collaboration.</p>
+                            <div class="text-center mt-4">
+                                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='40' viewBox='0 0 100 40'><rect fill='%230052a5' width='100' height='20'/><rect fill='%23ffffff' y='20' width='100' height='10'/><rect fill='%23bf0d3c' y='30' width='100' height='10'/></svg>"
+                                    alt="USA Flag" class="img-fluid floating" style="max-width: 200px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+    <section id="programs" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Programs</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card program-card h-100 slide-in-left">
+                        <div class="card-header text-center">Infrastructure Grants</div>
+                        <div class="card-body">
+                            <p>Funding for public works and infrastructure development projects that support economic
+                                development and create jobs.</p>
+                            <ul>
+                                <li>Road and bridge construction</li>
+                                <li>Broadband infrastructure</li>
+                                <li>Water and sewer systems</li>
+                                <li>Energy efficiency projects</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card program-card h-100 fade-in">
+                        <div class="card-header text-center">Innovation Grants</div>
+                        <div class="card-body">
+                            <p>Support for innovation and entrepreneurship to create a vibrant economic ecosystem in
+                                communities nationwide.</p>
+                            <ul>
+                                <li>Research and development</li>
+                                <li>Technology commercialization</li>
+                                <li>Startup incubation</li>
+                                <li>Workforce development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card program-card h-100 slide-in-right">
+                        <div class="card-header text-center">Winning Money Program</div>
+                        <div class="card-body">
+                            <p>Direct financial assistance to Americans who have qualified for rewards through federal
+                                programs and initiatives.</p>
+                            <ul>
+                                <li>Simple eligibility verification</li>
+                                <li>Fast disbursement of funds</li>
+                                <li>Dedicated support team</li>
+                                <li>Multiple payment options</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Apply Section -->
+    <section id="apply" class="py-5">
+        <div class="container">
+            <h2 class="section-title fade-in">How to Apply</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card program-card slide-in-left">
+                        <div class="card-header text-center">Application Process</div>
+                        <div class="card-body">
+                            <div class="d-flex mb-4 fade-in">
+                                <div class="me-4">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">1</div>
+                                </div>
+                                <div>
+                                    <h5>Check Eligibility</h5>
+                                    <p>Verify that you meet the basic requirements for the Winning Money Program.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4 fade-in">
+                                <div class="me-4">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">2</div>
+                                </div>
+                                <div>
+                                    <h5>Gather Documents</h5>
+                                    <p>Prepare identification and any supporting documents needed for verification.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4 fade-in">
+                                <div class="me-4">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">3</div>
+                                </div>
+                                <div>
+                                    <h5>Submit Application</h5>
+                                    <p>Complete the simple online application form with your information.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex fade-in">
+                                <div class="me-4">
+                                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">4</div>
+                                </div>
+                                <div>
+                                    <h5>Receive Funds</h5>
+                                    <p>Get approval and receive your winning money through your preferred method.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card program-card slide-in-right">
+                        <div class="card-header text-center">Eligibility Requirements</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item fade-in"><i class="fas fa-user-check text-primary me-2"></i>
+                                    U.S. Citizen or legal resident</li>
+                                <li class="list-group-item fade-in"><i class="fas fa-id-card text-primary me-2"></i>
+                                    Valid government-issued ID</li>
+                                <li class="list-group-item fade-in"><i
+                                        class="fas fa-birthday-cake text-primary me-2"></i> At least 18 years of age
+                                </li>
+                                <li class="list-group-item fade-in"><i class="fas fa-house-user text-primary me-2"></i>
+                                    Proof of address</li>
+                                <li class="list-group-item fade-in"><i
+                                        class="fas fa-money-check-alt text-primary me-2"></i> Bank account for direct
+                                    deposit (optional)</li>
+                            </ul>
+                            <div class="text-center mt-4">
+                                <a href="#contact" class="btn btn-eda floating">Start Application</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info mb-4 scale-in">
+                        <h4 class="mb-4">Get in Touch</h4>
+                        <div class="d-flex align-items-center mb-3 fade-in">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>Phone</h5>
+                                <p>+1 (518) 920-0831</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 fade-in">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p>economicsdevelopmenta91@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-3 fade-in">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Address</h5>
+                                <p>1401 Constitution Ave NW, Washington, DC 20230</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center fade-in">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Business Hours</h5>
+                                <p>Monday - Friday: 8:00 AM - 6:00 PM EST</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">U.S. ECONOMIC DEVELOPMENT ADMINISTRATION</h5>
+                    <p class="fade-in">Leading the federal economic development agenda through grants for
+                        infrastructure, innovation, and winning deliveries.</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="#home" class="fade-in">Home</a>
+                        <a href="#about" class="fade-in">About</a>
+                        <a href="#programs" class="fade-in">Programs</a>
+                        <a href="#apply" class="fade-in">How to Apply</a>
+                        <a href="#contact" class="fade-in">Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Programs</h5>
+                    <div class="footer-links">
+                        <a href="#programs" class="fade-in">Infrastructure Grants</a>
+                        <a href="#programs" class="fade-in">Innovation Grants</a>
+                        <a href="#programs" class="fade-in">Winning Money Program</a>
+                        <a href="#programs" class="fade-in">Economic Development</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p class="fade-in">© 2023 U.S. Economic Development Administration. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            // Show hero content after a brief delay
+            setTimeout(function () {
+                document.getElementById('hero-content').classList.add('appear');
+            }, 300);
+
+            // Animate the program card in the hero section
+            setTimeout(function () {
+                document.querySelector('.scale-in').classList.add('appear');
+            }, 800);
+
+            // Initialize intersection observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+
+                        // If it's a counter, animate the counting
+                        if (entry.target.classList.contains('counter')) {
+                            animateCounter(entry.target);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with animation classes
+            document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .counter').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Show/hide scroll to top button
+            window.addEventListener('scroll', function() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                
+                if (winScroll > 300) {
+                    document.getElementById('scroll-to-top').classList.add('visible');
+                } else {
+                    document.getElementById('scroll-to-top').classList.remove('visible');
+                }
+            });
+
+            // Scroll to top functionality
+            document.getElementById('scroll-to-top').addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Counter animation function
+            function animateCounter(element) {
+                const target = parseFloat(element.getAttribute('data-target'));
+                const duration = 2000; // Animation duration in ms
+                const frameDuration = 1000 / 60; // 60fps
+                const totalFrames = Math.round(duration / frameDuration);
+                let frame = 0;
+
+                // If already counted, skip
+                if (element.classList.contains('counted')) return;
+
+                const counter = setInterval(function () {
+                    frame++;
+
+                    // Calculate current value
+                    const progress = frame / totalFrames;
+                    const currentValue = Math.round(target * progress);
+
+                    // Update element
+                    if (element.id === 'counter-1') {
+                        element.textContent = currentValue.toFixed(1);
+                    } else {
+                        element.textContent = currentValue;
+                    }
+
+                    // Add plus sign if needed
+                    if (element.id === 'counter-2' && currentValue === target) {
+                        element.textContent = element.textContent + '+';
+                    }
+
+                    // Add percentage if needed
+                    if (element.id === 'counter-3' && currentValue === target) {
+                        element.textContent = element.textContent + '%';
+                    }
+
+                    // Add hours text if needed
+                    if (element.id === 'counter-4' && currentValue === target) {
+                        element.textContent = element.textContent + 'h';
+                    }
+
+                    // Check if complete
+                    if (frame === totalFrames) {
+                        clearInterval(counter);
+                        element.classList.add('counted');
+                    }
+                }, frameDuration);
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
